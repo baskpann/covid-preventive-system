@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# additional folders and files to untrack
+train-images
+.vscode
+*.json
+*.xml
+*.jpg
+*.yml
+user_data.py
