@@ -32,4 +32,4 @@ output_image = cv2.resize(test_img, (1000, 700))
 
 cv2.imshow("Detected from image ", output_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows
+cv2.destroyAllWindows()
