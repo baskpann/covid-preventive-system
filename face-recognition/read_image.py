@@ -2,10 +2,10 @@ import numpy as np
 import cv2
 import os
 from user_data import name
-import faceRecognition as fr
+import face_recog as fr
 
 #Give path to the image which you want to test
-test_img=cv2.imread(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\0\\image0000.jpg')
+test_img=cv2.imread('/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/0/image0000.jpg')
 
 faces_detected, gray_img = fr.faceDetection(test_img)
 print("Face detected: ", faces_detected)
@@ -13,7 +13,7 @@ print("Face detected: ", faces_detected)
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 #Give path of where trainingData.yml is saved
-face_recognizer.read(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\trainingData.yml')  
+face_recognizer.read('/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/training_data.yml')  
 
 for face in faces_detected:
     (x, y, w, h) = face

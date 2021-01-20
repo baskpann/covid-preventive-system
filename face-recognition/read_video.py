@@ -27,9 +27,8 @@ curr_label = -1
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 #Give path of where trainingData.yml is saved
-path_to_trained_data = 'face-recognition/train-images/training_data.yml'
+path_to_trained_data = '/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/training_data.yml'
 face_recognizer.read(path_to_trained_data)
-# face-recognition/train-images/training_data.yml
 cam = cv2.VideoCapture(0) 
 
 while True:
@@ -45,25 +44,26 @@ while True:
         (x, y, w, h) = face
         roi_gray = gray_img[y : y + h, x : x + h]
         label, confidence = face_recognizer.predict(roi_gray)
+        
         print ("Confidence :", confidence)
         print("Label :", label)
-        curr_label = label
+        
         # to show that the face is detected
         fr.draw_rect(test_img, face)
 
-        name = name[label]["name"]
-        id_ = name[label]["id"]
+        predicted_name = name[label]["name"]
+        predicted_id = name[label]["id"]
 
-        fr.put_text(test_img, name, x, y)
+        fr.put_text(test_img, predicted_name, x, y)
 
         # to make updation once on the sheet
-        if(name[label]['is_present']):
+        if(name[label]["is_present"]):
             # forces the next iter 
             continue
         else:
         	# this is to make user that only one entry is made.	
-            name[label]['is_present'] = True
-            wks.append_row([id_, name, json.dumps(now.strftime('%H:%M:%S').strip(''), default=json_serial)])
+            name[label]["is_present"] = True
+            wks.append_row([predicted_id, predicted_name, json.dumps(now.strftime('%H:%M:%S').strip(''), default=json_serial)])
 
     output_image = cv2.resize(test_img,(1000,700))
 
