@@ -8,7 +8,8 @@ def faceDetection(test_img):
     gray_img = cv2.cvtColor(test_img,cv2.COLOR_BGR2GRAY)
 
     #Give path to haar classifier
-    face_haar = cv2.CascadeClassifier(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\haarcascade_frontalface_alt.xml')
+    path_to_haar_classifier = 'face-recognition/haarcascade_frontalface_alt.xml'
+    face_haar = cv2.CascadeClassifier(path_to_haar_classifier)
     faces = face_haar.detectMultiScale(gray_img, scaleFactor=1.2, minNeighbors=3)
     
     return faces,gray_img

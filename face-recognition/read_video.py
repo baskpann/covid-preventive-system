@@ -3,7 +3,7 @@ import os, gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date, datetime
 from json import dumps
-import faceRecognition as fr
+import face_recog as fr
 
 # dictionary declared stored here
 from user_data import name
@@ -16,12 +16,10 @@ def json_serial(obj):
 now = datetime.now()
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name('attendancesheet-293208-852324a98bf2.json',scope)
+credentials = ServiceAccountCredentials.from_json_keyfile_name('/home/bas/college/projects/covid-preventive-system/face-recognition/attendancesheet-293208-852324a98bf2.json',scope)
 
 gc = gspread.authorize(credentials)
 wks = gc.open('Attendance').worksheet(now.strftime("%d/%m/%Y"))
-
-
 
 prev_label = -1
 curr_label = -1
@@ -29,8 +27,9 @@ curr_label = -1
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 #Give path of where trainingData.yml is saved
-face_recognizer.read(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\training_data.yml')
-
+path_to_trained_data = 'face-recognition/train-images/training_data.yml'
+face_recognizer.read(path_to_trained_data)
+# face-recognition/train-images/training_data.yml
 cam = cv2.VideoCapture(0) 
 
 while True:
@@ -52,19 +51,19 @@ while True:
         # to show that the face is detected
         fr.draw_rect(test_img, face)
 
-        predicted_name = name[label]["name"]
-        predicted_id = name[label]["id"]
+        name = name[label]["name"]
+        id_ = name[label]["id"]
 
-        fr.put_text(test_img, predicted_name, x, y)
+        fr.put_text(test_img, name, x, y)
 
         # to make updation once on the sheet
-        if(prev_label == curr_label):
+        if(name[label]['is_present']):
             # forces the next iter 
             continue
         else:
         	# this is to make user that only one entry is made.	
-            prev_label = curr_label
-            wks.append_row([predicted_id, predicted_name, json.dumps(now.strftime('%H:%M:%S').strip(''), default=json_serial)])
+            name[label]['is_present'] = True
+            wks.append_row([id_, name, json.dumps(now.strftime('%H:%M:%S').strip(''), default=json_serial)])
 
     output_image = cv2.resize(test_img,(1000,700))
 
