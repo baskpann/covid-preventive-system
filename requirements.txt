@@ -1,0 +1,7 @@
+gspread
+json
+oauth2client
+opencv-contrib-python
+numpy 
+PyJWT
+pyzbar

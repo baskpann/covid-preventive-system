@@ -21,9 +21,6 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('/home/bas/colleg
 gc = gspread.authorize(credentials)
 wks = gc.open('Attendance').worksheet(now.strftime("%d/%m/%Y"))
 
-prev_label = -1
-curr_label = -1
-
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 # Give path of where trainingData.yml is saved
