@@ -2,21 +2,21 @@ import numpy as np
 import cv2
 import os
 
-import faceRecognition as fr
+import face_recog as fr
 from user_data import name
 
-test_img=cv2.imread(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\0\\image0000.jpg')  #Give path to the image which you want to test
+test_img=cv2.imread("train-images/0/image0000.jpg")  #Give path to the image which you want to test
 
 
 faces_detected, gray_img = fr.faceDetection(test_img)
 print("face Detected: ", faces_detected)
 
-#Give path to the train-images folder
-faces, faceID = fr.labels_for_training_data(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\')
+# Give path to the train-images folder
+faces, faceID = fr.labels_for_training_data("train-images/")
 face_recognizer = fr.train_classifier(faces, faceID)
 
-#It will save the trained model.
-face_recognizer.save(r'C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\training_data.yml')
+# It will save the trained model.
+face_recognizer.save("train-images/training_data.yml")
 
 
 for face in faces_detected:
@@ -36,4 +36,4 @@ output_image = cv2.resize(test_img, (1000,700))
 
 cv2.imshow("face detection ", output_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows
+cv2.destroyAllWindows()
