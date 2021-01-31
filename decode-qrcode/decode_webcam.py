@@ -16,7 +16,7 @@ cap.set(4,480)
 time.sleep(2)
 
 def decode(im) : 
-    # Find barcodes and QR codes
+    # Find qr_codes and QR codes
     decodedObjects = pyzbar.decode(im)
     # Print results
     for obj in decodedObjects:
@@ -28,9 +28,9 @@ def decode(im) :
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 def open_cam():
-  bar_code_prev_iter = ''
+  is_detected = False
 
-  while(cap.isOpened()):
+  while(cap.isOpened() and not is_detected):
       # Capture frame-by-frame
       ret, frame = cap.read()
       # Our operations on the frame come here
@@ -62,19 +62,16 @@ def open_cam():
           print('Type : ', decodedObject.type)
           print('Data : ', decodedObject.data,'\n')
 
-          barCode = str(decodedObject.data, 'utf-8')
-          if(bar_code_prev_iter == barCode):
-            # forces the next iter 
-            continue
-          else:
-        	# this is to make user that only one entry is made.	
-            bar_code_prev_iter = barCode
-            if barCode is not None:
-              print(decrypt(barCode))
+          qr_code = str(decodedObject.data, 'utf-8')
+
+          if qr_code is not None:
+            print(decrypt(qr_code))
+            is_detected = True
+            
           cv2.putText(frame, "",(x, y), font, 1, (0,255,255), 2, cv2.LINE_AA)
                 
       # Display the resulting frame
-      cv2.imshow('Barcode Scanner',frame)
+      cv2.imshow('qr_code Scanner',frame)
       key = cv2.waitKey(1)    
 
   # When everything done, release the capture
