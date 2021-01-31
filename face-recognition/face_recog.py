@@ -8,13 +8,13 @@ def faceDetection(test_img):
     gray_img = cv2.cvtColor(test_img,cv2.COLOR_BGR2GRAY)
 
     #Give path to haar classifier
-    path_to_haar_classifier = '/home/bas/college/projects/covid-preventive-system/face-recognition/haarcascade_frontalface_alt.xml'
+    path_to_haar_classifier = 'haarcascade_frontalface_alt.xml'
     face_haar = cv2.CascadeClassifier(path_to_haar_classifier)
     faces = face_haar.detectMultiScale(gray_img, scaleFactor=1.2, minNeighbors=3)
     
-    return faces,gray_img
+    return faces, gray_img
 
-#Labels for training data has been created
+# Labels for training data has been created
 def labels_for_training_data(directory):
     faces = []
     faceID = []
@@ -47,7 +47,7 @@ def labels_for_training_data(directory):
     
     return faces, faceID
 
-#Here training Classifier is called
+# Here training Classifier is called
 def train_classifier(faces,faceID):                              
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
     face_recognizer.train(faces, np.array(faceID))
@@ -55,11 +55,11 @@ def train_classifier(faces,faceID):
     return face_recognizer
 
 
-#Drawing a Rectangle on the Face Function
+# Drawing a Rectangle on the Face Function
 def draw_rect(test_img,face):                                      
     (x, y, w, h)=face
     cv2.rectangle(test_img, (x, y),(x + w, y + h), (0, 255, 0), thickness=3)
 
-#Putting text on images
+# Putting text on images
 def put_text(test_img, text, x, y):                                    
     cv2.putText(test_img, text, (x, y), cv2.FONT_HERSHEY_DUPLEX, 3, (255, 0, 0), 6)
