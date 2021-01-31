@@ -1,12 +1,16 @@
-import cv2, json
-import os, gspread
-from oauth2client.service_account import ServiceAccountCredentials
+import json
+import os
 from datetime import date, datetime
 from json import dumps
-import face_recog as fr
 
+import cv2
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+import face_recog as fr
 # dictionary declared stored here
 from user_data import name
+
 
 def json_serial(obj):
     if isinstance(obj, (datetime, date)):

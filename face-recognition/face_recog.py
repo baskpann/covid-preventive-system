@@ -1,6 +1,8 @@
-import numpy as np
-import cv2
 import os
+
+import cv2
+import numpy as np
+
 
 #Face detection is done
 def faceDetection(test_img):   

@@ -1,8 +1,10 @@
-import numpy as np
-import cv2
 import os
-from user_data import name
+
+import cv2
+import numpy as np
+
 import face_recog as fr
+from user_data import name
 
 #Give path to the image which you want to test
 test_img=cv2.imread('/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/0/image0000.jpg')

@@ -1,9 +1,11 @@
 from __future__ import print_function
 
-import pyzbar.pyzbar as pyzbar
-import numpy as np
-import cv2
 import time
+
+import cv2
+import numpy as np
+import pyzbar.pyzbar as pyzbar
+
 from decrypt_jwt import decrypt
 
 # get the webcam:  

@@ -1,5 +1,7 @@
-import cv2
 import sys
+
+import cv2
+
 cpt = 0
 
 cam = cv2.VideoCapture(0)
