@@ -61,9 +61,9 @@ while True:
         else:
         	# this is to make user that only one entry is made.	
             label_set.add(label)
-            wks.append_row([predicted_id, predicted_name, now.strftime("%H:%M:%S")])
+            wks.append_row([predicted_id, predicted_name, now.strftime("%I:%M:%S %p")])
 
-    output_image = cv2.resize(test_img, (500,500))
+    output_image = cv2.resize(test_img, (700,500))
 
     cv2.imshow("Face detector ", output_image)
     if cv2.waitKey(10) == ord('q'):
