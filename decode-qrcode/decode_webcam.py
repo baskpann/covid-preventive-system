@@ -17,12 +17,12 @@ time.sleep(2)
 
 def decode(im) : 
     # Find qr_codes and QR codes
-    decodedObjects = pyzbar.decode(im)
+    decoded_objects = pyzbar.decode(im)
     # Print results
-    for obj in decodedObjects:
+    for obj in decoded_objects:
         print('Type : ', obj.type)
         print('Data : ', obj.data,'\n')     
-    return decodedObjects
+    return decoded_objects
 
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -36,9 +36,9 @@ def open_cam():
       # Our operations on the frame come here
       im = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
           
-      decodedObjects = decode(im)
+      decoded_objects = decode(im)
 
-      for decodedObject in decodedObjects: 
+      for decodedObject in decoded_objects: 
           points = decodedObject.polygon
       
           # If the points do not form a quad, find convex hull
@@ -57,11 +57,6 @@ def open_cam():
           x = decodedObject.rect.left
           y = decodedObject.rect.top
 
-          print(x, y)
-
-          print('Type : ', decodedObject.type)
-          print('Data : ', decodedObject.data,'\n')
-
           qr_code = str(decodedObject.data, 'utf-8')
 
           if qr_code is not None:
@@ -71,8 +66,9 @@ def open_cam():
           cv2.putText(frame, "",(x, y), font, 1, (0,255,255), 2, cv2.LINE_AA)
                 
       # Display the resulting frame
-      cv2.imshow('qr_code Scanner',frame)
-      key = cv2.waitKey(1)    
+      cv2.imshow('QrCode Scanner',frame)
+      if cv2.waitKey(1) == ord('q'):
+        break    
 
   # When everything done, release the capture
   cap.release()
