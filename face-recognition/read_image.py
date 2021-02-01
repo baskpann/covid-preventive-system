@@ -7,7 +7,7 @@ import face_recog as fr
 from user_data import name
 
 #Give path to the image which you want to test
-test_img=cv2.imread('/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/0/image0000.jpg')
+test_img=cv2.imread('train-images/0/image0000.jpg')
 
 faces_detected, gray_img = fr.faceDetection(test_img)
 print("Face detected: ", faces_detected)
@@ -15,7 +15,7 @@ print("Face detected: ", faces_detected)
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 #Give path of where trainingData.yml is saved
-face_recognizer.read('/home/bas/college/projects/covid-preventive-system/face-recognition/train-images/training_data.yml')  
+face_recognizer.read('face-recognition/train-images/training_data.yml')  
 
 for face in faces_detected:
     (x, y, w, h) = face

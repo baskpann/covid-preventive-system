@@ -29,7 +29,7 @@ label_set = {-1}
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 # Give path of where trainingData.yml is saved
-path_to_trained_data = 'train-images/training_data.yml'
+path_to_trained_data = 'face-recognition/train-images/training_data.yml'
 face_recognizer.read(path_to_trained_data)
 cam = cv2.VideoCapture(0) 
 

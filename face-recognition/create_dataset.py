@@ -12,7 +12,7 @@ while True:
     
     cv2.imshow("dataset creating script", frame) # show image in window
 
-    tmp_path = "train-images/tmp/image%04i.jpg"
+    tmp_path = "face-recognition/train-images/tmp/image%04i.jpg"
     #cv2.imwrite("C:\\Users\\Bas\\Documents\\College\\Project\\Face-Recognition\\train-images\\0\\image%04i.jpg" %cpt, frame)
     cv2.imwrite(tmp_path %cpt, frame)
     cpt += 1    

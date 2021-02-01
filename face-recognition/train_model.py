@@ -6,7 +6,7 @@ import numpy as np
 import face_recog as fr
 from user_data import name
 
-test_img=cv2.imread("train-images/0/image0000.jpg")  #Give path to the image which you want to test
+test_img=cv2.imread("face-recognition/train-images/0/image0000.jpg")  #Give path to the image which you want to test
 
 
 faces_detected, gray_img = fr.faceDetection(test_img)
@@ -17,7 +17,7 @@ faces, faceID = fr.labels_for_training_data("train-images/")
 face_recognizer = fr.train_classifier(faces, faceID)
 
 # It will save the trained model.
-face_recognizer.save("train-images/training_data.yml")
+face_recognizer.save("face-recognition/train-images/training_data.yml")
 
 
 for face in faces_detected:
