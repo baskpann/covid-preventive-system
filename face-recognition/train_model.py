@@ -17,7 +17,7 @@ faces, faceID = fr.labels_for_training_data("train-images/")
 face_recognizer = fr.train_classifier(faces, faceID)
 
 # It will save the trained model.
-face_recognizer.save("face-recognition/train-images/training_data.yml")
+face_recognizer.save("face-recognition/train-images/training_data.y.ml")
 
 
 for face in faces_detected:
