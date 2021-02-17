@@ -2,15 +2,20 @@ import json
 import os
 from datetime import date, datetime
 from json import dumps
+from time import sleep
 
 import cv2
 import gspread
+import RPi.GPIO as gp
 from oauth2client.service_account import ServiceAccountCredentials
 
 import face_recog as fr
 # dictionary declared stored here
 from user_data import name
 
+gp.setmode(gp.BOARD)
+gp.setwarnings(False)
+gp.setup(8, gp.OUT)
 
 def json_serial(obj):
     if isinstance(obj, (datetime, date)):
@@ -65,7 +70,10 @@ while True:
         else:
         	# this is to make user that only one entry is made.	
             label_set.add(label)
+            gp.output(8, 1)
             wks.append_row([predicted_id, predicted_name, now.strftime("%I:%M:%S %p")])
+            sleep(2)
+            gp.output(8, 0)
 
     output_image = cv2.resize(test_img, (700,500))
 
