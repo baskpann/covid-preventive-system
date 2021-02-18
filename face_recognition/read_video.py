@@ -13,9 +13,11 @@ import face_recog as fr
 # dictionary declared stored here
 from user_data import name
 
+# rasp buzzer setup
 gp.setmode(gp.BOARD)
 gp.setwarnings(False)
 gp.setup(8, gp.OUT)
+gp.output(8, 0)
 
 def json_serial(obj):
     if isinstance(obj, (datetime, date)):
