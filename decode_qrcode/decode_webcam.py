@@ -62,7 +62,6 @@ def open_cam():
           if qr_code is not None:
             print(decrypt(qr_code))
             is_detected = True
-            
           cv2.putText(frame, "",(x, y), font, 1, (0,255,255), 2, cv2.LINE_AA)
                 
       # Display the resulting frame
